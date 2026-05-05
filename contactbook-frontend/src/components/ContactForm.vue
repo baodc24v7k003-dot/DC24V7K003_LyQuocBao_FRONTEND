@@ -25,11 +25,17 @@
     </div>
 
     <div class="form-group form-check">
-      <input name="favorite" type="checkbox" class="form-check-input" v-model="contactLocal.favorite" />
-      <label for="favorite" class="form-check-label">
-        <strong>Liên hệ yêu thích</strong>
-      </label>
-    </div>
+  <input 
+    name="favorite" 
+    type="checkbox" 
+    class="form-check-input" 
+    :checked="contactLocal.favorite"
+    @change="contactLocal.favorite = $event.target.checked"
+  />
+  <label for="favorite" class="form-check-label">
+    <strong>Liên hệ yêu thích</strong>
+  </label>
+</div>
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Lưu</button>
@@ -61,12 +67,16 @@ export default {
       email: yup.string().email("E-mail không đúng.").max(50, "E-mail tối đa 50 ký tự."),
       address: yup.string().max(100, "Địa chỉ tối đa 100 ký tự."),
       phone: yup.string().matches(/((09|03|07|08|05)+([0-9]{8})\b)/g, "Số điện thoại không hợp lệ."),
+      
     });
 
-    return {
-      contactLocal: { ...this.contact },   // Clone object
-      contactFormSchema,
-    };
+      return {
+    contactLocal: { 
+      ...this.contact,
+      favorite: this.contact.favorite === true  
+    },
+    contactFormSchema,
+  };
   },
   methods: {
     submitContact() {

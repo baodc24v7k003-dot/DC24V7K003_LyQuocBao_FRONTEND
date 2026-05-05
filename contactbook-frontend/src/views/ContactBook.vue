@@ -24,6 +24,9 @@
         <button class="btn btn-sm btn-danger" @click="removeAllContacts">
           <i class="fas fa-trash"></i> Xóa tất cả
         </button>
+        <button class="btn btn-sm btn-warning" @click="showFavorites">
+           <i class="fas fa-star"></i> Yêu thích
+        </button>
       </div>
     </div>
     <div class="mt-3 col-md-6">
@@ -102,6 +105,14 @@ export default {
     },
   },
   methods: {
+    async showFavorites() {
+    try {
+        this.contacts = await ContactService.getFavorites();
+        this.activeIndex = -1;
+    } catch (error) {
+        console.log(error);
+    }
+    },
     async retrieveContacts() {
       try {
         this.contacts = await ContactService.getAll();
