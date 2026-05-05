@@ -43,6 +43,12 @@
             <i class="fas fa-edit"></i> Hiệu chỉnh</span
           >
         </router-link>
+        <router-link
+          :to="{ name: 'contact.add' }"
+          class="btn btn-success btn-sm"
+        >
+          <i class="fas fa-plus"></i> Thêm mới
+        </router-link>
       </div>
     </div>
   </div>
